@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Note Taking App</title>
+        <link rel="stylesheet" href="./style.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awsome/6.5.1/css/all.min.css"> -->
+        <!--is a cdn content delivery network-->
+    </head>
+    <body>
+        <div id="container">
+
+            <div class="notes_sidebar">
+                <div class ="folder" id="root">
+                    <!--Hold the children folders or notes-->
+                     <section id="note_small_title">Daily Note</section>
+                     <section id="note_time">December 3rd 2024</section>
+                </div>
+            </div>
+            <div class="notes_editor">
+                <input class="note_title" placeholder="Enter Title here">
+                <textarea class="note_body"> I am the note bod</textarea>
+            </div>
+        
+
+            <!-- <div id="list-header">
+                <div id="addNoteDiv" onclick="popup()">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+                 <div class="blankDiv"></div>
+                 <div class="blankDiv"></div>
+            </div>
+            <div id="list-container">
+                <ul id="notes-list"></ul>
+            </div>
+        </div> -->
+        <script src="./script.js"></script>
+    </body>
+</html>

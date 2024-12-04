@@ -1,0 +1,72 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #8c53ff;
+    margin: 0;
+    display: flex; /* Makes children elements side by side */
+    height: 100vh;
+}
+
+#container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.notes_sidebar {
+    background-color: #fff;
+    width: 300px; /* Fixed width for the sidebar */
+    height: auto; /* Allow height to adjust dynamically */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
+}
+
+
+
+.folder {
+    padding: 10px;
+    margin: 2;
+    display: flex;
+    justify-items: center;
+    flex-flow: column wrap;
+    border-radius: 5%;
+}
+
+.folder:hover *{
+    background-color: yellow;
+}
+
+.folder:active *{
+    background-color: green;
+}
+
+
+/*Note editor*/
+.notes_editor {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1em;
+    flex-grow: 1; /* Takes up the remaining space */
+    background-color: #ffffff; /* Background color for distinction */
+}
+
+.notes_editor *{
+    border:none;
+    outline:none;
+    width: 100%;
+    box-sizing: border-box;  /* Ensures padding doesn't affect width */
+}
+
+.note_title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #444; 
+    margin-bottom: 1em; 
+    background: none;
+    text-transform: capitalize; 
+}
+.note_body {
+    margin-top: 1em;
+    width:100%;
+    flex-grow:1
+}
