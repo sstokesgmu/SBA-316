@@ -1,6 +1,5 @@
 
-// export default
-class NotesAPI {
+export default   class NotesAPI {
   static Note = class {
     constructor(title, tag, body) {
       (this.title = title), (this.tag = tag), (this.body = body);
@@ -50,33 +49,6 @@ class NotesAPI {
   //     return ids;
   //   }
 }
-
-//  NotesAPI.saveNote(
-//     {
-//         title: "Test Note",
-//         tag: "TagName",
-//         body: "This is the body of the note",
-//     }
-// );
-// NotesAPI.saveNote(
-//     {
-//         title: "Test Note",
-//         tag: "TagName",
-//         body: "This is the body of the note",
-//     }
-// );
-// NotesAPI.saveNote(
-//     {
-//         title: "New Note",
-//         tag: "TagName",
-//         body: "This is the body of the note",
-//     }
-// );
-
-// NotesAPI.saveNote(
-//     new NotesAPI.Note("Constructor", "test", "When are testing the constructor object")
-// );
-// NotesAPI.deleteNote(122);
 
 
 
