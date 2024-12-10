@@ -1,7 +1,6 @@
 
 // export default
 class NotesAPI {
-
   static Note = class {
     constructor(title, tag, body) {
       (this.title = title), (this.tag = tag), (this.body = body);
@@ -11,7 +10,6 @@ class NotesAPI {
   //SON.parse() static method parses a JSON string, constructing the JavaScript value or object described by the string.
   static getAllNotes() {
     const notes = JSON.parse(localStorage.getItem("notes") || "[]");
-
     //Sort notes based on time stamp
     //A negative value indicates that a should come before b.
     //A positive value indicates that a should come after b.
@@ -34,7 +32,6 @@ class NotesAPI {
       note.last_updated = new Date().toISOString(); //simplifies format based on ISO 8601
       notes.push(note);
     }
-
     //converts a JavaScript value to a JSON string,
     localStorage.setItem("notes", JSON.stringify(notes));
   }
@@ -76,12 +73,10 @@ class NotesAPI {
 //     }
 // );
 
-console.log(NotesAPI.getAllNotes());
-
 // NotesAPI.saveNote(
 //     new NotesAPI.Note("Constructor", "test", "When are testing the constructor object")
 // );
 // NotesAPI.deleteNote(122);
 
-console.log(NotesAPI.getAllNotes());
+
 
