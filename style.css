@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #8c53ff;
+    background-color: fff;
     margin: 0;
     display: flex; /* Makes children elements side by side */
     height: 100vh;
@@ -28,15 +28,19 @@ body {
     margin: 2;
     display: flex;
     justify-items: center;
+    justify-content: space-evenly;
     flex-flow: column wrap;
     border-radius: 5%;
 }
 
-.folder:hover *{
+.notelist-item {
+    margin-bottom: 1em;
+}
+.notelist-item:hover *{
     background-color: yellow;
 }
 
-.folder:active *{
+.notelist-item.selected *{
     background-color: green;
 }
 
@@ -44,6 +48,7 @@ body {
 /*Note editor*/
 .notes_editor {
     display: flex;
+    visibility: visible;
     flex-direction: column;
     padding: 1em 1em;
     flex-grow: 1; /* Takes up the remaining space */
