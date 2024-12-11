@@ -1,5 +1,5 @@
 
-export default   class NotesAPI {
+export default class NotesAPI {
   static Note = class {
     constructor(title, tag, body) {
       (this.title = title), (this.tag = tag), (this.body = body);
@@ -18,9 +18,16 @@ export default   class NotesAPI {
     return notes;
   }
 
+  static getNote(id) {
+    let notes = JSON.parse(localStorage.getItem("notes"));
+    return notes.find((element) => element.id == id)
+  }
+
   static saveNote(note) {
     const notes = NotesAPI.getAllNotes();
     const existing = notes.find((element) => element.id == note.id);
+    console.log(existing);
+    console.log(note);
     if (existing) {
       existing.title = note.title; //*Did we change the title
       existing.body = note.body; //*Updates to the note body
@@ -41,13 +48,6 @@ export default   class NotesAPI {
     const updatedList = notes.filter((element) => element.id != id);
     localStorage.setItem("notes", JSON.stringify(updatedList));
   }
-
-  //   static checkNoteIds(notes) {
-  //     //check if this is a modified note
-
-  //     const ids = new Set(notes.map((obj) => obj.id));
-  //     return ids;
-  //   }
 }
 
 

@@ -75,3 +75,13 @@ body {
     width:100%;
     flex-grow:1
 }
+
+.context-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+.context-menu.off {
+    visibility: hidden;
+}
