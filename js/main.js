@@ -20,8 +20,7 @@ const view = new NotesView(
       view.updateNoteList(NotesAPI.getAllNotes());
       console.log(`Note Deleted: ${id}`);
 
-      //? if there are no notes remaining use place holder: return to the inital state of the application
-      try {
+      
         //? grab a random note
         let notes = NotesAPI.getAllNotes();
         if (notes.length !== 0) {
@@ -29,9 +28,10 @@ const view = new NotesView(
           let i = Math.floor(Math.random() * notes.length);
           console.log(i);
           view.setNoteEditor(notes[i]);
-        }
-        throw new Error("There are no more notes return to initial state");
-      } catch (error) {}
+        } 
+        //? if there are no notes remaining use place holder: return to the inital state of the application
+        else 
+          view.resetNoteEditor()
     },
     onNoteSelect(id) {
       console.log(`Note selected: ${id}`);

@@ -31,16 +31,22 @@ export default class NotesView {
     this.onNoteEdit = onNoteEdit;
     console.log(this.activeNote);
 
+    this.resetNoteEditor();
+
+    const button = document.getElementById("myBtn");
+    button.addEventListener("click", () => {
+      this.onNoteAdd("Untitled", "", "");
+    });
+  }
+
+  resetNoteEditor(){
+    this.noteEditor.innerHTML = this.nullNote;
     const noteTitle = this.rootElement.querySelector(".note_title");
     noteTitle.setAttribute("data-isDirty", "false");
     const noteBody = this.rootElement.querySelector(".note_body");
     noteTitle.setAttribute("data-isDirty", "false"); //! We will use this to check if the value of the title or body text has changed
 
-    //! contextMenu will be a substitute for right click
-    // sideBar.addEventListener("contextmenu", () => {
-    //     this.onNoteAdd();
-    // });
-
+    
     [noteTitle, noteBody].forEach((inputField) => {
       //! This event happens when we no longer click on the note or we hit eneter
       inputField.addEventListener("blur", () => {
@@ -56,11 +62,8 @@ export default class NotesView {
         inputField.dataset.isDirty = true;
       });
     });
-  }
 
-  // resetNoteEditor(){
-  //   this.noteEditor.innerHTML =
-  // }
+  }
 
   _createListItemHtml(id, title, body, updated) {
     const Max_Body_Length = 40;
