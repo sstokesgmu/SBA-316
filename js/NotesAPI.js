@@ -26,8 +26,6 @@ export default class NotesAPI {
   static saveNote(note) {
     const notes = NotesAPI.getAllNotes();
     const existing = notes.find((element) => element.id == note.id);
-    console.log(existing);
-    console.log(note);
     if (existing) {
       existing.title = note.title; //*Did we change the title
       existing.body = note.body; //*Updates to the note body
