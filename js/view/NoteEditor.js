@@ -1,41 +1,49 @@
 
 export default class NoteEditor{
-    constructor(rootElement)
+    constructor(rootElement,callbacks = [])
     {
         this.root = rootElement;
         this.editor = this.root.querySelector(".notes_editor");
         this.template = `   <input class="note_title" placeholder="Enter Title ... " data>
               <textarea class="note_body" placeholder="Start Writing Here..."></textarea>`;
-        this.callbacks = {};
     
          //Get inner contents
          this.title = this.editor.querySelector(".note_title");
          this.body = this.editor.querySelector(".note_body");
-
+         this.callbackObj = {};
+         if(callbacks.length > 0)
+            callbacks.forEach((f,i)=> {
+                try {
+                    if(typeof f  === "function")
+                        this.setCallBacks(f);
+                    else 
+                        throw new Error(`The type of element at index ${callbacks[i]} is not a function`); 
+                } catch (e) {
+                    console.log(e);
+                }
+            })
+            console.log(this.callbackObj);
          //Initial Call
          this.assignToHtml([this.title, this.body])
     }
 
     assignToHtml(htmlEls){
-        htmlEls.forEach((element) =>{
+        htmlEls.forEach((element) => {
             element.setAttribute("data-isDirty", "false");
             element.addEventListener("blur", () => {
-                if (inputField.dataset.isDirty) {
-                    this.activeNote.title = noteTitle.value;
-                    this.activeNote.body = noteBody.value;
-                    this.onNoteEdit(this.activeNote);
+                if (element.dataset.isDirty) {
+                    this.callbacks?.onNoteEdit(this.activeNote);
                     inputField.dataset.isDirty = false;
-            }
+                }
             });
             element.addEventListener("change", () => {
                 inputField.dataset.isDirty = true;
             });
         })
     }
-    setCallBacks()
-    {
 
-    }   
+    getAcitveNote(id){    }
+    setCallBacks(func) {  this.callbackObj[func.name] = func; }    
     setNoteEditor(title, body)
     {
         this.title.value = title;
@@ -44,9 +52,10 @@ export default class NoteEditor{
     resetNoteEditor(){
         this.title.value= "";
         this.body.value = "";
-        console.log(this.editor.innerHTML);
     }
 }
+
+
 
 
 

@@ -20,6 +20,7 @@ export default class NotesView {
           </div>`;
 
     this.noteEditor = this.rootElement.querySelector(".notes_editor");
+    //console.log(this.noteEditor);
     this.noteSideBar = this.rootElement.querySelector(".notes_sidbar");
     this.activeNote = activeNote;
     this.nullNote = `   <input class="note_title" placeholder="Enter Title ... " data>
@@ -131,31 +132,5 @@ export default class NotesView {
       .classList.add("selected");
     this.activeNote = note;
     console.log(this.activeNote);
-  }
-
-  //   setEditorContent(note, editor) {
-  //     console.log(note);
-  //     const selectedTitle = note.querySelector("#note_small_title");
-  //     const selectedBody = note.querySelector("#note_small_body");
-
-  //     console.log(NotesAPI.Note);
-  //     editor.querySelector(".note_title").value =
-  //       selectedTitle.textContent.trim();
-  //     editor.querySelector(".note_body").value = selectedBody.textContent.trim();
-
-  //     const menu = document.querySelector(".context-menu");
-  //     menu.classList.add("off");
-  //     let sideBar = this.rootElement.querySelector(".notes_sidebar");
-  //     sideBar.addEventListener("contextmenu", (event) =>
-  //       this.showMenu(event, menu)
-  //     );
-  //   }
-
-  showMenu(event, menu) {
-    event.preventDefault(); //Stops the real right click menu
-    console.log(event.clientX, event.clientY);
-    menu.style.left = event.clientX + "px";
-    menu.style.top = event.clientY + "px";
-    menu.classList.remove("off");
   }
 }
