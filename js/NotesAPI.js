@@ -13,7 +13,7 @@ export default class NotesAPI {
     //A negative value indicates that a should come before b.
     //A positive value indicates that a should come after b.
     notes.sort(function (a, b) {
-      return new Date(a.last_updated) > new Date(b.last_updated) ? 1 : -1;
+      return new Date(a.last_updated) > new Date(b.last_updated) ? -1 : 1;
     });
     return notes;
   }

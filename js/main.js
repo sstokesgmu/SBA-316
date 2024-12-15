@@ -1,7 +1,6 @@
-import NotesView from "./NotesView.js";
 import NotesAPI from "./NotesAPI.js"; //!Import most used functions
 import NoteEditor from "./view/NoteEditor.js";
-import NoteSideBar from "./view/NoteSideBar.js";
+import SideBar from "./view/NoteSideBar.js";
 
 /**
  * @type {Element} will be the root element for the app
@@ -10,8 +9,9 @@ import NoteSideBar from "./view/NoteSideBar.js";
 const app = document.getElementById("app");
 app.innerHTML = `   
 <div class="notes_sidebar" id="sideMenu">
+    <button id="myBtn">Click Me to Add a Note</button> 
     <div class="folder" id="root">
-        <button id="myBtn">Try it</button> 
+    
     </div>
 </div>
 <div class="notes_editor">
@@ -20,84 +20,40 @@ app.innerHTML = `
 </div>`;
 const editor = new NoteEditor(app,
         [onNoteEdit]);
-//const sidebar = new 
+const sideBar = new SideBar(app,[onNoteAdd, onNoteSelect, onNoteDelete])
+
+if(NotesAPI.getAllNotes().length > 0);
+    sideBar.updateNoteList(NotesAPI.getAllNotes());
 
 
+function onNoteEdit(note) {
+    
+    console.log(`Note ${note.id}, Title: "${note.title}" has been edited`);
+    NotesAPI.saveNote(note);
+    sideBar.updateNoteList(NotesAPI.getAllNotes());
+}
 
-function onNoteEdit(id) {
-    noteObj = NotesAPI.getNote(id);
-    console.log(`Note ${noteObj.id}, Title: "${noteObj.title}" has been edited`);
-    NotesAPI.saveNote(noteobj);
+function onNoteAdd(title, body) {
+     NotesAPI.saveNote(new NotesAPI.Note(title, "", body));
+     sideBar.updateNoteList( NotesAPI.getAllNotes());
+     console.log("A new note has been added");
+}
+
+function onNoteSelect(id){
+    console.log(`Note selected: ${id}`);
+    let note = NotesAPI.getNote(id);
+    sideBar.updateNotesClassList(note.id);
+    editor.setNoteEditor(note);
+
+    console.log(`The note editor is now showing note: ${note?.id}`);
+}
+
+function onNoteDelete(id){
+    NotesAPI.deleteNote(id);
+    let notes = NotesAPI.getAllNotes();
+    sideBar.updateNoteList(notes);
 }
 
 
-//     onNoteEdit(noteObj) {
-    //       console.log(
-    //         `Note ${noteObj.id}, Title: "${noteObj.title}" has been edited`
-    //       );
-    //       NotesAPI.saveNote(noteObj);
-    //       view.updateNoteList(NotesAPI.getAllNotes());
-    //       // console.log(newTitle);
-    //       // console.log(newBody);
-    //     }
-
-
-
-
-// const view = new NotesView(
-//   app,
-//   new NotesAPI.Note(undefined, undefined, undefined),
-//   {
-//     //?Does the order matter
-
-//     onNoteAdd(title, tag, body) {
-//       let note = new NotesAPI.Note(title, tag, body);
-//       NotesAPI.saveNote(note);
-//       view.updateNoteList(NotesAPI.getAllNotes());
-//       console.log("Note has been added!");
-//     },
-//     onNoteDelete(id) {
-//       NotesAPI.deleteNote(id);
-//       view.updateNoteList(NotesAPI.getAllNotes());
-//       console.log(`Note Deleted: ${id}`);
-
-      
-//         //? grab a random note
-//         let notes = NotesAPI.getAllNotes();
-//         if (notes.length !== 0) {
-//           //! The local storage still has elements, find one, send it to the editor
-//           let i = Math.floor(Math.random() * notes.length);
-//           console.log(i);
-//           view.setNoteEditor(notes[i]);
-//         } 
-//         //? if there are no notes remaining use place holder: return to the inital state of the application
-//         else 
-//           view.resetNoteEditor()
-//     },
-//     onNoteSelect(id) {
-//       console.log(`Note selected: ${id}`);
-//       let noteObj = NotesAPI.getNote(id);
-//       //console.log(noteObj);
-//       //THis is what the note object currently looks like
-//       //{
-//       // "id": 152,
-//       // "title": "Changed this title",
-//       // "tag": "books",
-//       // "body": "This is the body of the note, we can write here",
-//       // "last_updated": "2024-12-04T06:56:35.478Z"
-//       //}
-//       view.setNoteEditor(noteObj);
-//     },
-//     onNoteEdit(noteObj) {
-//       console.log(
-//         `Note ${noteObj.id}, Title: "${noteObj.title}" has been edited`
-//       );
-//       NotesAPI.saveNote(noteObj);
-//       view.updateNoteList(NotesAPI.getAllNotes());
-//       // console.log(newTitle);
-//       // console.log(newBody);
-//     },
-//   }
-// );
 
 

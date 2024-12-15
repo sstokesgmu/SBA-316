@@ -10,7 +10,7 @@ export default class NoteEditor{
          //Get inner contents
          this.title = this.editor.querySelector(".note_title");
          this.body = this.editor.querySelector(".note_body");
-         this.callbackObj = {};
+         this.callbacks = {};
          if(callbacks.length > 0)
             callbacks.forEach((f,i)=> {
                 try {
@@ -21,8 +21,8 @@ export default class NoteEditor{
                 } catch (e) {
                     console.log(e);
                 }
-            })
-            console.log(this.callbackObj);
+            });
+            console.log(this.callbacks);
          //Initial Call
          this.assignToHtml([this.title, this.body])
     }
@@ -32,26 +32,40 @@ export default class NoteEditor{
             element.setAttribute("data-isDirty", "false");
             element.addEventListener("blur", () => {
                 if (element.dataset.isDirty) {
+                    this.activeNote.title = this.title.value;
+                    this.activeNote.body = this.body.value;
                     this.callbacks?.onNoteEdit(this.activeNote);
-                    inputField.dataset.isDirty = false;
+                    this.setNoteEditor(this.activeNote);
+                    element.dataset.isDirty = false;
                 }
             });
             element.addEventListener("change", () => {
-                inputField.dataset.isDirty = true;
+                element.dataset.isDirty = true;
             });
         })
     }
 
     getAcitveNote(id){    }
-    setCallBacks(func) {  this.callbackObj[func.name] = func; }    
-    setNoteEditor(title, body)
+    setCallBacks(func) { this.callbacks[func.name] = func; }    
+    setNoteEditor(note)
     {
-        this.title.value = title;
-        this.body.value = body
+        console.log(note);
+        this.activeNote = note 
+        this.title.value = this.activeNote.title;
+        this.body.value = this.activeNote.body;   
     }
-    resetNoteEditor(){
+    resetNoteEditor() {
         this.title.value= "";
         this.body.value = "";
+    }
+
+    findNote(notes){
+        if (notes.length !== 0) { //! The local storage still has elements, grab one
+            let i = Math.floor(Math.random() * notes.length);
+            this.setNoteEditor(notes[i]);
+        } else {
+            this.resetNoteEditor()
+        }
     }
 }
 
