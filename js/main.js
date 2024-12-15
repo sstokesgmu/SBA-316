@@ -52,6 +52,7 @@ function onNoteDelete(id){
     NotesAPI.deleteNote(id);
     let notes = NotesAPI.getAllNotes();
     sideBar.updateNoteList(notes);
+    editor.findNote(notes);
 }
 
 

@@ -36,7 +36,7 @@ export default class NotesAPI {
       note.last_updated = new Date().toISOString(); //simplifies format based on ISO 8601
       notes.push(note);
     }
-    //converts a JavaScript value to a JSON string,
+    //converts a JavaScript value to a JSON string, and initializes a notes array if it doesn't exist
     localStorage.setItem("notes", JSON.stringify(notes));
   }
 
